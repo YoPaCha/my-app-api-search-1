@@ -7,7 +7,6 @@ const fastify = require('fastify')({
 const cors = require('@fastify/cors');
 
 fastify.register(cors, { 
-  // put your options here
   origin: '*'
 })
 
@@ -37,5 +36,4 @@ fastify.listen({ port: 3131 }, function (err, address) {
         fastify.log.error(err)
         process.exit(1)
     }
-    // Server is now listening on ${address}
 })
