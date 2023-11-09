@@ -11,7 +11,7 @@ fastify.register(cors, {
 })
 
 fastify.register(require('@fastify/mysql'), {
-    connectionString: 'mysql://root:root@127.0.0.1:8889/ynov_app'
+    connectionString: 'mysql://root:root@my-app-sql:3306/ynov_app'
 });
 
 // Declare a route
@@ -21,7 +21,6 @@ fastify.get('/', function (request, reply) {
 
 
 fastify.get('/api/search', function (req, reply) {
-    console.log(req.query);
     fastify.mysql.query(
         'SELECT * FROM Articles WHERE title LIKE ?', [`%${req.query.string}%`],
         function onResult(err, result) {
@@ -31,7 +30,7 @@ fastify.get('/api/search', function (req, reply) {
 })
 
 // Run the server!
-fastify.listen({ port: 3131 }, function (err, address) {
+fastify.listen({ port: 3131, host: '0.0.0.0' }, function (err, address) {
     if (err) {
         fastify.log.error(err)
         process.exit(1)
