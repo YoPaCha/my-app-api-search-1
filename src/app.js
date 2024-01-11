@@ -35,6 +35,7 @@ const listener = async (message, channel) => {
     }
 };
 
+// subscribe to redis channel
 redisClient.subscribe('c-articles', listener);
 
 // Declare a route
@@ -42,7 +43,7 @@ fastify.get('/', function (request, reply) {
     reply.send({ hello: 'world' })
 })
 
-
+// get all articles
 fastify.get('/api/search', function (req, reply) {
     fastify.mysql.query(
         'SELECT * FROM Articles WHERE title LIKE ?', [`%${req.query.string}%`],
