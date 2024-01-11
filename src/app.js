@@ -8,8 +8,8 @@ const fastify = require('fastify')({
 });
 const cors = require('@fastify/cors');
 
-fastify.register(cors, { 
-  origin: '*'
+fastify.register(cors, {
+    origin: '*'
 })
 
 fastify.register(require('@fastify/mysql'), {
@@ -32,7 +32,7 @@ const listener = async (message, channel) => {
     }
     catch (err) {
         console.log(err)
-    } 
+    }
 };
 
 redisClient.subscribe('c-articles', listener);
